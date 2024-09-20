@@ -3,6 +3,7 @@ import { AppState } from "@/AppState.js";
 import Ad from "@/components/globals/Ad.vue";
 import PageSelection from "@/components/globals/PageSelection.vue";
 import PostCard from "@/components/globals/PostCard.vue";
+import PostForm from "@/components/globals/PostForm.vue";
 import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
@@ -56,6 +57,9 @@ function clearPosts() {
         <div class="row justify-content-between">
           <div class="col-6">
             <div class="row">
+              <div>
+                <PostForm />
+              </div>
               <div v-for="post in posts" :key="post.id" class="col-12">
                 <PostCard :postProp="post" />
               </div>

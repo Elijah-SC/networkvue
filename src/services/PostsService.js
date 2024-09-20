@@ -4,6 +4,10 @@ import { logger } from "@/utils/Logger.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+  async createPost(postData) {
+    const response = await api.post(`api/posts`, postData)
+    logger.log(`created Post`, response.data)
+  }
   clearSearchQuery() {
     AppState.postQuery = ``
   }
