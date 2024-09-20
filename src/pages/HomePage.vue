@@ -11,12 +11,23 @@ onMounted(() =>
   getPosts())
 
 const posts = computed(() => AppState.posts)
+const currentPage = computed(() => AppState.currentPage)
+const totalPages = computed(() => AppState.TotalPages)
 
 async function getPosts() {
   try {
     await postsService.getPosts()
   } catch (error) {
     Pop.meow(error)
+    logger.error(error)
+  }
+}
+async function changePage(pageNumber) {
+  try {
+    await postsService.changePage(pageNumber)
+  }
+  catch (error) {
+    Pop.meow(error);
     logger.error(error)
   }
 }
@@ -29,10 +40,17 @@ async function getPosts() {
       <div class="col-3"> Fancy Side Bar</div>
       <div class="col-9">
         <div class="row">
-          <div class="col-8"> POSTS
+          <div class="col-8">
             <div class="row">
               <div v-for="post in posts" :key="post.id" class="col-12">
                 <PostCard :postProp="post" />
+              </div>
+
+              <div v-if="totalPages" class="d-flex justify-content-around p-4 g-4 ">
+                <button @click="changePage(currentPage - 1)" :disabled="currentPage < 2"
+                  class="m-2 btn btn-outline-dark" role="button"> <i class="mdi mdi-arrow-left"></i> Newer </button>
+                <button @click="changePage(currentPage + 1)" :disabled="currentPage == totalPages"
+                  class="m-2 btn btn-outline-dark" role="button">Older <i class="mdi mdi-arrow-right"></i></button>
               </div>
             </div>
           </div>

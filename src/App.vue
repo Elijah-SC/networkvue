@@ -29,4 +29,8 @@ h4,
 h5 {
   margin-bottom: unset;
 }
+
+div {
+  word-wrap: break-word;
+}
 </style>
