@@ -9,6 +9,8 @@ export const AppState = reactive({
   /** @type {import('./models/Post.js').Post[]} */
   posts: [],
   currentPage: 0,
-  TotalPages: 0
+  TotalPages: 0,
+  /** @type {import('./models/Ad.js').Ad[]} */
+  ads: []
 })
 

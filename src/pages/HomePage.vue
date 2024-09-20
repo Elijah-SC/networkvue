@@ -1,18 +1,22 @@
 <script setup>
 import { AppState } from "@/AppState.js";
 import PostCard from "@/components/globals/PostCard.vue";
+import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
 import Pop from "@/utils/Pop.js";
 import { computed, onMounted } from "vue";
 
 
-onMounted(() =>
-  getPosts())
+onMounted(() => {
+  getPosts(), getAds()
+}
+)
 
 const posts = computed(() => AppState.posts)
 const currentPage = computed(() => AppState.currentPage)
 const totalPages = computed(() => AppState.TotalPages)
+const adds = computed(() => AppState.ads)
 
 async function getPosts() {
   try {
@@ -28,6 +32,16 @@ async function changePage(pageNumber) {
   }
   catch (error) {
     Pop.meow(error);
+    logger.error(error)
+  }
+}
+
+async function getAds() {
+  try {
+    await addService.getAds()
+  }
+  catch (error) {
+    Pop.error(error);
     logger.error(error)
   }
 }
@@ -54,7 +68,9 @@ async function changePage(pageNumber) {
               </div>
             </div>
           </div>
-          <div class="col-4"> ADDs</div>
+          <div class="col-4">
+            {{ adds }}
+          </div>
         </div>
       </div>
     </section>
