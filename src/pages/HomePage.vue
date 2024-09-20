@@ -1,12 +1,15 @@
 <script setup>
+import { AppState } from "@/AppState.js";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
 import Pop from "@/utils/Pop.js";
-import { onMounted } from "vue";
+import { computed, onMounted } from "vue";
 
 
 onMounted(() =>
   getPosts())
+
+const posts = computed(() => AppState.posts)
 
 async function getPosts() {
   try {
@@ -21,7 +24,7 @@ async function getPosts() {
 <template>
 
   <body>
-
+    {{ posts }}
   </body>
 </template>
 
