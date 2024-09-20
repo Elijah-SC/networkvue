@@ -20,4 +20,13 @@ import { AppState } from './AppState.js';
 :root {
   --main-height: calc(100vh - 32px - 64px);
 }
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-bottom: unset;
+}
 </style>
