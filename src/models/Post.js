@@ -10,6 +10,7 @@ export class Post {
     this.likes = data.likes
     this.creatorName = data.creator.name
     this.creatorPicture = data.creator.picture
+    this.creatorGraduatedBool = data.creator.graduated
   }
 }
 

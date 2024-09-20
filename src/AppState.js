@@ -10,6 +10,7 @@ export const AppState = reactive({
   posts: [],
   currentPage: 0,
   TotalPages: 0,
+  postQuery: ``,
   /** @type {import('./models/Ad.js').Ad[]} */
   ads: []
 })

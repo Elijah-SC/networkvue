@@ -16,9 +16,9 @@ const props = defineProps({
       <img :src="postProp.creatorPicture" :alt="postProp.creatorName" class="img-fluid creator-img">
       <div>
         <p class="ms-3">{{ postProp.creatorName }}</p>
-        <div class="ms-4 d-flex">
+        <div class="ms-4 d-flex posted-Dated">
           <p>{{ postProp.createdAt.toLocaleDateString() }}</p>
-          <i class="mdi mdi-school ms-2"></i>
+          <i v-if="postProp.creatorGraduatedBool" class="mdi mdi-school ms-2"></i>
         </div>
       </div>
     </div>
@@ -47,13 +47,16 @@ const props = defineProps({
 
 img {
   object-fit: cover;
-  object-position: center;
 }
 
 .post-img {
   width: 100%;
-  max-height: 50vh;
-  aspect-ratio: 1/1;
+  height: 100%;
+  max-height: 70vh;
 
+}
+
+.posted-Dated {
+  font-size: 11px;
 }
 </style>

@@ -1,14 +1,26 @@
 <script setup>
+import { AppState } from "@/AppState.js";
 import Ad from "@/components/globals/Ad.vue";
+import PageSelection from "@/components/globals/PageSelection.vue";
+import PostCard from "@/components/globals/PostCard.vue";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
 import Pop from "@/utils/Pop.js";
-import { reactive } from "vue";
+import { computed, onMounted, onUnmounted, reactive } from "vue";
 
+onUnmounted(() => {
+  clearPosts()
+  clearSearchQuery()
+}
+)
 const editableFormData = reactive({
   searchQuery: ``,
 })
 
+const posts = computed(() => AppState.posts)
+const currentPage = computed(() => AppState.currentPage)
+const totalPages = computed(() => AppState.TotalPages)
+const ads = computed(() => AppState.ads)
 
 async function findPostsByQuery() {
   try {
@@ -19,6 +31,12 @@ async function findPostsByQuery() {
     Pop.error(error);
     logger.error(error)
   }
+}
+function clearPosts() {
+  postsService.clearPosts()
+}
+function clearSearchQuery() {
+  postsService.clearSearchQuery()
 }
 </script>
 
@@ -35,8 +53,21 @@ async function findPostsByQuery() {
             <button><i class="mdi mdi-magnify"></i></button>
           </form>
         </div>
+        <div class="row">
+          <div v-for="post in posts" :key="post.id" class="col-12">
+            <PostCard :postProp="post" />
+          </div>
+        </div>
+
+        <PageSelection />
       </div>
+
       <div class="col-2">
+        <div v-for="ad in ads" :key="ad.title">
+          <Ad :adProp="ad" />
+        </div>
+      </div>
+      <div class="col-12">
 
       </div>
     </section>
