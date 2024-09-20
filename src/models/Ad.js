@@ -7,6 +7,10 @@ export class Ad {
     this.square = data.square
     this.banner = data.banner
   }
+
+  get AdLink() {
+    return `https://` + `${this.linkURL}`
+  }
 }
 
 const data = {

@@ -9,6 +9,7 @@ class AdService {
     logger.log(`got Adds`, response.data)
     const newAds = response.data.map(adPOJO => new Ad(adPOJO))
     AppState.ads = newAds
+    logger.log(`NEW ADS`, newAds)
   }
 
 }

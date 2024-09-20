@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from "@/AppState.js";
+import Ad from "@/components/globals/Ad.vue";
 import PostCard from "@/components/globals/PostCard.vue";
 import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
@@ -16,7 +17,7 @@ onMounted(() => {
 const posts = computed(() => AppState.posts)
 const currentPage = computed(() => AppState.currentPage)
 const totalPages = computed(() => AppState.TotalPages)
-const adds = computed(() => AppState.ads)
+const ads = computed(() => AppState.ads)
 
 async function getPosts() {
   try {
@@ -50,11 +51,11 @@ async function getAds() {
 <template>
 
   <body class="container-fluid">
-    <section class="row">
-      <div class="col-3"> Fancy Side Bar</div>
+    <section class="row justify-content-between">
+      <div class="col-2"> Fancy Side Bar</div>
       <div class="col-9">
-        <div class="row">
-          <div class="col-8">
+        <div class="row justify-content-between">
+          <div class="col-6">
             <div class="row">
               <div v-for="post in posts" :key="post.id" class="col-12">
                 <PostCard :postProp="post" />
@@ -69,7 +70,9 @@ async function getAds() {
             </div>
           </div>
           <div class="col-4">
-            {{ adds }}
+            <div v-for="ad in ads" :key="ad.title">
+              <Ad :adProp="ad" />
+            </div>
           </div>
         </div>
       </div>

@@ -4,6 +4,10 @@ import { logger } from "@/utils/Logger.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+  async findPostsByQuery(query) {
+    const response = await api.get(`api/posts?query=${query}`)
+    logger.log(`got posts with query of ${query}`, response.data)
+  }
   async changePage(pageNumber) {
     const response = await api.get(`api/posts?page=${pageNumber}`)
     logger.log(response.data)
