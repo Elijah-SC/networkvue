@@ -52,10 +52,10 @@ function clearPosts() {
 
   <body class="container-fluid">
     <section class="row justify-content-between">
-      <div class="col-2"> Fancy Side Bar</div>
-      <div class="col-9">
+      <div class="col-md-2"> Fancy Side Bar</div>
+      <div class="col-md-10">
         <div class="row justify-content-between">
-          <div class="col-6">
+          <div class="col-md-10">
             <div class="row">
               <div>
                 <PostForm />
@@ -66,7 +66,7 @@ function clearPosts() {
               <PageSelection />
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-md-2">
             <div v-for="ad in ads" :key="ad.title">
               <Ad :adProp="ad" />
             </div>

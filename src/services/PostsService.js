@@ -4,9 +4,17 @@ import { logger } from "@/utils/Logger.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+  async deletePost(postId) {
+    const response = await api.delete(`api/posts/${postId}`)
+    logger.log(`deletedPost`, response.data)
+    const foundPost = AppState.posts.findIndex(post => post.id == postId)
+    AppState.posts.splice(foundPost, 1)
+  }
   async createPost(postData) {
     const response = await api.post(`api/posts`, postData)
     logger.log(`created Post`, response.data)
+    const newPost = new Post(response.data)
+    AppState.posts.push(newPost)
   }
   clearSearchQuery() {
     AppState.postQuery = ``

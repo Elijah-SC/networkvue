@@ -33,12 +33,12 @@ async function createPost() {
     </div>
     <div class="flex-grow-1">
       <form @submit.prevent="createPost()">
-        <textarea v-model="editableFormData.body" name="Post" class="text-input p-1"
-          placeholder="write your post Here"></textarea>
+        <textarea v-model="editableFormData.body" name="Post" class="text-input form-control p-1"
+          placeholder="write your post Here" required maxlength="5000"></textarea>
         <div class="d-flex justify-content-between py-3">
 
           <div>
-            <input v-model="editableFormData.imgUrl" type="text" placeholder="Img or Video Url">
+            <input v-model="editableFormData.imgUrl" type="text" placeholder="Img or Video Url" maxlength="500">
           </div>
           <div>
             <button class="btn btn-info">Post</button>
@@ -58,7 +58,6 @@ img {
 }
 
 .text-input {
-  width: 100%;
   height: 100px;
 }
 

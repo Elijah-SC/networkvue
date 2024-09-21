@@ -3,6 +3,7 @@ import { AppState } from "@/AppState.js";
 import Ad from "@/components/globals/Ad.vue";
 import PageSelection from "@/components/globals/PageSelection.vue";
 import PostCard from "@/components/globals/PostCard.vue";
+import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
 import Pop from "@/utils/Pop.js";
@@ -13,6 +14,8 @@ onUnmounted(() => {
   clearSearchQuery()
 }
 )
+onMounted(() => getAds())
+
 const editableFormData = reactive({
   searchQuery: ``,
 })
@@ -21,6 +24,16 @@ const posts = computed(() => AppState.posts)
 const currentPage = computed(() => AppState.currentPage)
 const totalPages = computed(() => AppState.TotalPages)
 const ads = computed(() => AppState.ads)
+
+async function getAds() {
+  try {
+    await addService.getAds()
+  }
+  catch (error) {
+    Pop.error(error);
+    logger.error(error)
+  }
+}
 
 async function findPostsByQuery() {
   try {
