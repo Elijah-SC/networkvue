@@ -8,7 +8,7 @@ import { postsService } from "@/services/PostsService.js";
 import { profileService } from "@/services/ProfileService.js";
 import { logger } from "@/utils/Logger.js";
 import Pop from "@/utils/Pop.js";
-import { computed, watch } from "vue";
+import { computed, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute()
@@ -18,10 +18,16 @@ watch(() => route.params.profileId, () => {
   getAds()
 }, { immediate: true })
 
+onUnmounted(() => clearPosts())
+
 const account = computed(() => AppState.account)
 const activeProfile = computed(() => AppState.activeAccount)
 const ads = computed(() => AppState.ads)
 const posts = computed(() => AppState.posts)
+
+function clearPosts() {
+  postsService.clearPosts()
+}
 
 async function findProfileById() {
   try {

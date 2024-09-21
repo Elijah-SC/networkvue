@@ -24,6 +24,11 @@ class PostsService {
   clearSearchQuery() {
     AppState.postQuery = ``
   }
+  async changeProfilePage(pageNumber, userId) {
+    const response = await api.get(`/api/profiles/${userId}/posts?page=${pageNumber}`)
+    logger.log(`changing profile page`, response.data)
+    this.handleResponseData(response.data)
+  }
   async changeSearchPage(pageNumber, query) {
     const response = await api.get(`api/posts?page=${pageNumber}&query=${query}`)
     logger.log(`changing SearchPage`, response.data)
