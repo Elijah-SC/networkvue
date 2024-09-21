@@ -4,6 +4,11 @@ import { logger } from "@/utils/Logger.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+  async getPostsByProfileId(userId) {
+    const response = await api.get(`/api/profiles/${userId}/posts`)
+    logger.log(`got all posts for user with id ${userId}`, response.data)
+    this.handleResponseData(response.data)
+  }
   async deletePost(postId) {
     const response = await api.delete(`api/posts/${postId}`)
     logger.log(`deletedPost`, response.data)
@@ -14,7 +19,7 @@ class PostsService {
     const response = await api.post(`api/posts`, postData)
     logger.log(`created Post`, response.data)
     const newPost = new Post(response.data)
-    AppState.posts.push(newPost)
+    AppState.posts.unshift(newPost)
   }
   clearSearchQuery() {
     AppState.postQuery = ``
