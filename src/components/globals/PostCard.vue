@@ -24,6 +24,16 @@ async function deletePost() {
     logger.error(error)
   }
 }
+async function likePost() {
+  try {
+    const postId = props.postProp.id
+    await postsService.likePost(postId)
+  }
+  catch (error) {
+    Pop.error(error);
+    logger.log(error)
+  }
+}
 </script>
 
 
@@ -48,12 +58,20 @@ async function deletePost() {
       <p class="p-2">{{ postProp.body }}</p>
       <img v-if="postProp.imgUrl != ``" :src="postProp.imgUrl" alt="postImg" class="post-img">
     </div>
-    <div v-if="account" class="d-flex justify-content-between p-2 fs-4">
-      <div class="fs-5"> <button @click="deletePost()" v-if="postProp.creatorId == account.id"
+    <div class="d-flex justify-content-between p-2 fs-4">
+      <div class="fs-5"> <button @click="deletePost()" v-if="account && postProp.creatorId == account.id"
           class="btn btn-danger">Delete</button></div>
-      <div class="d-flex">
-        <i class="mdi mdi-heart-outline text-info me-2"></i>
-        <p>{{ postProp.likes.length }}</p>
+      <div>
+        <div v-if="account" @click="likePost()" class="d-flex gap-2">
+          <i v-if="postProp.likes.some(obj => obj.id == account.id)" role="button" class="mdi mdi-heart text-info"
+            title="unlike post"></i>
+          <i v-else role="button" class="mdi mdi-heart-outline text-info" title="like post"></i>
+          <p>{{ postProp.likes.length }}</p>
+        </div>
+        <div v-else class="d-flex gap-2">
+          <i class="mdi mdi-heart text-info" title="likes"></i>
+          <p>{{ postProp.likes.length }}</p>
+        </div>
       </div>
     </div>
   </body>

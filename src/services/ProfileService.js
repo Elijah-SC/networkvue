@@ -4,6 +4,7 @@ import { Account } from "@/models/Account.js"
 import { AppState } from "@/AppState.js"
 
 class ProfileService {
+
   async findProfileById(profileId) {
     AppState.activeAccount = null
     const response = await api.get(`api/profiles/${profileId}`)

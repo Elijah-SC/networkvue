@@ -4,7 +4,6 @@ import Ad from "@/components/globals/Ad.vue";
 import PageSelection from "@/components/globals/PageSelection.vue";
 import PostCard from "@/components/globals/PostCard.vue";
 import PostForm from "@/components/globals/PostForm.vue";
-import ProfileEditModal from "@/components/globals/ProfileEditModal.vue";
 import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
@@ -53,7 +52,7 @@ function clearPosts() {
 
   <body class="container-fluid">
     <section class="row justify-content-between">
-      <div class="col-md-2"> Fancy Side Bar</div>
+      <div class="col-md-2"></div>
       <div class="col-md-10">
         <div class="row justify-content-between">
           <div class="col-md-10">
@@ -64,7 +63,9 @@ function clearPosts() {
               <div v-for="post in posts" :key="post.id" class="col-12">
                 <PostCard :postProp="post" />
               </div>
-              <PageSelection />
+              <div class="sticky-bottom">
+                <PageSelection />
+              </div>
             </div>
           </div>
           <div class="col-md-2">

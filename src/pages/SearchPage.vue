@@ -72,8 +72,10 @@ function clearSearchQuery() {
             <PostCard :postProp="post" />
           </div>
         </div>
+        <div class="sticky-bottom">
 
-        <PageSelection />
+          <PageSelection />
+        </div>
       </div>
 
       <div class="col-2">

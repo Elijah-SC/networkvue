@@ -4,6 +4,16 @@ import { logger } from "@/utils/Logger.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+  async likePost(postId) {
+    const response = await api.post(`api/posts/${postId}/like`)
+    logger.log(`post with id of ${postId} liked post`, response.data)
+    const newPost = new Post(response.data)
+    const postIndex = AppState.posts.findIndex(post => post.id == postId)
+    AppState.posts.splice(postIndex, 1, newPost)
+  }
+  updateActiveAccount(account) {
+    AppState.activeAccount = account
+  }
   async getPostsByProfileId(userId) {
     const response = await api.get(`/api/profiles/${userId}/posts`)
     logger.log(`got all posts for user with id ${userId}`, response.data)

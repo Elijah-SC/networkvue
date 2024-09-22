@@ -34,15 +34,20 @@ async function changePage(pageNumber) {
 
 <template>
 
-  <body>
-    <div v-if="totalPages" class="d-flex justify-content-around p-4 g-4 sticky-bottom">
-      <button @click="changePage(currentPage - 1)" :disabled="currentPage < 2" class="m-2 btn btn-outline-dark"
-        role="button"> <i class="mdi mdi-arrow-left"></i> Newer </button>
-      <button @click="changePage(currentPage + 1)" :disabled="currentPage == totalPages"
-        class="m-2 btn btn-outline-dark" role="button">Older <i class="mdi mdi-arrow-right"></i></button>
-    </div>
-  </body>
+  <div v-if="totalPages && totalPages > 1"
+    class="d-flex justify-content-around p-1 my-1 g-4 page-navigation rounded-pill">
+    <button @click="changePage(currentPage - 1)" :disabled="currentPage < 2" class="m-2 btn btn-outline-light"
+      role="button"> <i class="mdi mdi-arrow-left"></i> Newer </button>
+    <button @click="changePage(currentPage + 1)" :disabled="currentPage == totalPages" class="m-2 btn btn-outline-light"
+      role="button">Older <i class="mdi mdi-arrow-right"></i></button>
+  </div>
+
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.page-navigation {
+  background-color: rgba(0, 0, 0, 0.529);
+  backdrop-filter: blur(10px);
+}
+</style>

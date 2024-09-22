@@ -67,7 +67,7 @@ async function getPostsByProfileId() {
 
   <body class="container-fluid">
     <section class="row justify-content-between">
-      <div class="col-md-2"> Fancy Side Bar</div>
+      <div class="col-md-2"></div>
       <div class="col-md-10">
         <div class="row justify-content-between">
           <div class="col-md-10">
@@ -86,21 +86,25 @@ async function getPostsByProfileId() {
                 <div class="d-flex justify-content-end p-2 gap-2">
                   <p v-if="activeProfile.class != ``" class="pe-5 fw-bold">Class of {{ activeProfile.class }}</p>
                   <p v-else class="pe-5 fw-bold">Class of {{ new Date().getFullYear() }}</p>
-                  <a :href="activeProfile.linkedin" title="linkedIn Link"><i class="mdi mdi-linkedin"></i></a>
-                  <a :href="activeProfile.resume" title="Resume Link"> <i class="mdi mdi-note-text"></i> </a>
-                  <a :href="activeProfile.github" title="Github Link"> <i class="mdi mdi-github"></i></a>
+                  <a :href="activeProfile.linkedin" target="_blank" title="linkedIn Link"><i
+                      class="mdi mdi-linkedin"></i></a>
+                  <a :href="activeProfile.resume" target="_blank" title="Resume Link"> <i class="mdi mdi-note-text"></i>
+                  </a>
+                  <a :href="activeProfile.github" target="_blank" title="Github Link"> <i
+                      class="mdi mdi-github"></i></a>
                 </div>
                 <div class="ps-5 mt-4 d-flex justify-content-center align-items-center gap-1">
                   <h1>{{ activeProfile.name }}</h1>
-                  <h2 data-bs-toggle="modal" data-bs-target="#exampleModal" title="edit Account Info" role="button"
-                    class="text-success"><i class="mdi mdi-pen"></i></h2>
+                  <h2 v-if="account && activeProfile.id == account.id" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" title="edit Account Info" role="button" class="text-success"><i
+                      class="mdi mdi-pen"></i></h2>
                 </div>
                 <div class="mt-4 text-center">
                   <p> {{ activeProfile.bio }}</p>
                 </div>
               </div>
-              <div v-if="account && activeProfile">
-                <div v-if="activeProfile.id == account.id">
+              <div>
+                <div v-if="account && activeProfile && activeProfile.id == account.id">
                   <PostForm />
                 </div>
                 <div v-for="post in posts" :key="post.id">
@@ -108,7 +112,10 @@ async function getPostsByProfileId() {
                 </div>
                 <div>
                 </div>
-                <PageSelection />
+                <div class="sticky-bottom">
+
+                  <PageSelection />
+                </div>
               </div>
             </div>
           </div>
