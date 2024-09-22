@@ -4,6 +4,7 @@ import Ad from "@/components/globals/Ad.vue";
 import PageSelection from "@/components/globals/PageSelection.vue";
 import PostCard from "@/components/globals/PostCard.vue";
 import PostForm from "@/components/globals/PostForm.vue";
+import ProfileEditModal from "@/components/globals/ProfileEditModal.vue";
 import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
@@ -75,6 +76,7 @@ function clearPosts() {
       </div>
     </section>
   </body>
+
 </template>
 
 <style scoped lang="scss"></style>

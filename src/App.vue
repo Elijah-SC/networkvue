@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
+import ProfileEditModal from "./components/globals/ProfileEditModal.vue";
 
 </script>
 
@@ -11,7 +12,7 @@ import { AppState } from './AppState.js';
   <main>
     <router-view />
   </main>
-
+  <ProfileEditModal />
 </template>
 
 <style lang="scss">

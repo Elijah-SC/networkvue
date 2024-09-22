@@ -92,7 +92,8 @@ async function getPostsByProfileId() {
                 </div>
                 <div class="ps-5 mt-4 d-flex justify-content-center align-items-center gap-1">
                   <h1>{{ activeProfile.name }}</h1>
-                  <h2 title="edit Account Info" role="button" class="text-success"><i class="mdi mdi-pen"></i></h2>
+                  <h2 data-bs-toggle="modal" data-bs-target="#exampleModal" title="edit Account Info" role="button"
+                    class="text-success"><i class="mdi mdi-pen"></i></h2>
                 </div>
                 <div class="mt-4 text-center">
                   <p> {{ activeProfile.bio }}</p>
