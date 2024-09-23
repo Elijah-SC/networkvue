@@ -4,6 +4,7 @@ import Ad from "@/components/globals/Ad.vue";
 import PageSelection from "@/components/globals/PageSelection.vue";
 import PostCard from "@/components/globals/PostCard.vue";
 import ProfileEditModal from "@/components/globals/ProfileEditModal.vue";
+import Navbar from "@/components/Navbar.vue";
 import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
 import { logger } from "@/utils/Logger.js";
@@ -56,36 +57,41 @@ function clearSearchQuery() {
 
 <template>
   <div class="container-fluid">
-    <section class="row justify-content-around">
+    <section class="row">
       <div class="col-2">
         <div></div>
       </div>
-      <div class="col-8">
-        <div class="text-center my-3">
-          <form @submit.prevent="findPostsByQuery()">
-            <input v-model="editableFormData.searchQuery" type="text">
-            <button><i class="mdi mdi-magnify"></i></button>
-          </form>
-        </div>
+      <div class="col-10">
         <div class="row">
-          <div v-for="post in posts" :key="post.id" class="col-12">
-            <PostCard :postProp="post" />
+          <div>
+            <Navbar />
+          </div>
+          <div class="col-10">
+            <div class="text-center my-3">
+              <form @submit.prevent="findPostsByQuery()">
+                <input v-model="editableFormData.searchQuery" type="text">
+                <button><i class="mdi mdi-magnify"></i></button>
+              </form>
+            </div>
+            <div class="row">
+              <div v-for="post in posts" :key="post.id" class="col-12">
+                <PostCard :postProp="post" />
+              </div>
+            </div>
+            <div class="sticky-bottom">
+              <PageSelection />
+            </div>
+          </div>
+
+          <div class="col-2">
+            <div v-for="ad in ads" :key="ad.title">
+              <Ad :adProp="ad" />
+            </div>
           </div>
         </div>
-        <div class="sticky-bottom">
-
-          <PageSelection />
-        </div>
       </div>
 
-      <div class="col-2">
-        <div v-for="ad in ads" :key="ad.title">
-          <Ad :adProp="ad" />
-        </div>
-      </div>
-      <div class="col-12">
 
-      </div>
     </section>
   </div>
 </template>

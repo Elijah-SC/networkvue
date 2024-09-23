@@ -16,7 +16,6 @@ async function deletePost() {
   try {
     const UserWantsToDelete = await Pop.confirm(`are you sure you want to Delete this post`)
     if (!UserWantsToDelete) return
-    logger.log(`deletingPost`)
     await postsService.deletePost(props.postProp.id)
   }
   catch (error) {
@@ -39,7 +38,7 @@ async function likePost() {
 
 <template>
 
-  <body class="post-body my-3">
+  <body class="post-body my-3 rounded">
     <div class="d-flex p-2">
       <router-link :to="{ name: 'Profile', params: { profileId: postProp.creatorId } }">
         <img :src="postProp.creatorPicture" :alt="postProp.creatorName" class="img-fluid creator-img">
@@ -59,11 +58,11 @@ async function likePost() {
       <img v-if="postProp.imgUrl != ``" :src="postProp.imgUrl" alt="postImg" class="post-img">
     </div>
     <div class="d-flex justify-content-between p-2 fs-4">
-      <div class="fs-5"> <button @click="deletePost()" v-if="account && postProp.creatorId == account.id"
+      <div class="fs-5"> <button @click="deletePost()" v-if="postProp.creatorId == account?.id"
           class="btn btn-danger">Delete</button></div>
       <div>
         <div v-if="account" @click="likePost()" class="d-flex gap-2">
-          <i v-if="postProp.likes.some(obj => obj.id == account.id)" role="button" class="mdi mdi-heart text-info"
+          <i v-if="postProp.likes.find(obj => obj.id == account.id)" role="button" class="mdi mdi-heart text-info"
             title="unlike post"></i>
           <i v-else role="button" class="mdi mdi-heart-outline text-info" title="like post"></i>
           <p>{{ postProp.likes.length }}</p>

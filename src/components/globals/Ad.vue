@@ -13,7 +13,7 @@ defineProps({
 
   <body class="my-2">
     <a :href="adProp.AdLink" target="_blank">
-      <img :src="adProp.tall" alt="">
+      <img :src="adProp.tall" alt="" class="rounded">
     </a>
   </body>
 </template>

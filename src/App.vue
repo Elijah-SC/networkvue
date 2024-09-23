@@ -6,9 +6,6 @@ import ProfileEditModal from "./components/globals/ProfileEditModal.vue";
 </script>
 
 <template>
-  <header>
-    <Navbar />
-  </header>
   <main>
     <router-view />
   </main>

@@ -3,6 +3,7 @@ import { AppState } from "@/AppState.js";
 import PageSelection from "@/components/globals/PageSelection.vue";
 import PostCard from "@/components/globals/PostCard.vue";
 import PostForm from "@/components/globals/PostForm.vue";
+import Navbar from "@/components/Navbar.vue";
 import { addService } from "@/services/AddService.js";
 import { postsService } from "@/services/PostsService.js";
 import { profileService } from "@/services/ProfileService.js";
@@ -69,39 +70,47 @@ async function getPostsByProfileId() {
     <section class="row justify-content-between">
       <div class="col-md-2"></div>
       <div class="col-md-10">
+        <div>
+          <Navbar />
+        </div>
         <div class="row justify-content-between">
           <div class="col-md-10">
             <div class="row p-0">
-              <div v-if="activeProfile" class="col-12 profile-box my-2 p-0">
-                <div class="cover-box">
-                  <img :src="activeProfile.coverImg" alt="" class="cover-img">
-                  <div class="profile-absolute">
-                    <img :src="activeProfile.picture" alt="profilePicture" class="profile-img">
-                    <div class="graduated-PA">
-                      <i v-if="activeProfile.graduated" class="mdi mdi-school graduated-Icon" title="Graduated"></i>
-                      <i v-else class="mdi mdi-desk graduated-Icon" title="Not Graduated"></i>
+              <div v-if="activeProfile" class="col-12">
+                <section class="mx-2 profile-box my-2 p-0">
+
+                  <div class="cover-box">
+                    <img :src="activeProfile.coverImg" alt="" class="cover-img">
+                    <div class="profile-absolute">
+                      <img :src="activeProfile.picture" alt="profilePicture" class="profile-img">
+                      <div class="graduated-PA">
+                        <i v-if="activeProfile.graduated" class="mdi mdi-school graduated-Icon" title="Graduated"></i>
+                        <i v-else class="mdi mdi-desk graduated-Icon" title="Not Graduated"></i>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="d-flex justify-content-end p-2 gap-2">
-                  <p v-if="activeProfile.class != ``" class="pe-5 fw-bold">Class of {{ activeProfile.class }}</p>
-                  <p v-else class="pe-5 fw-bold">Class of {{ new Date().getFullYear() }}</p>
-                  <a :href="activeProfile.linkedin" target="_blank" title="linkedIn Link"><i
-                      class="mdi mdi-linkedin"></i></a>
-                  <a :href="activeProfile.resume" target="_blank" title="Resume Link"> <i class="mdi mdi-note-text"></i>
-                  </a>
-                  <a :href="activeProfile.github" target="_blank" title="Github Link"> <i
-                      class="mdi mdi-github"></i></a>
-                </div>
-                <div class="ps-5 mt-4 d-flex justify-content-center align-items-center gap-1">
-                  <h1>{{ activeProfile.name }}</h1>
-                  <h2 v-if="account && activeProfile.id == account.id" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal" title="edit Account Info" role="button" class="text-success"><i
-                      class="mdi mdi-pen"></i></h2>
-                </div>
-                <div class="mt-4 text-center">
-                  <p> {{ activeProfile.bio }}</p>
-                </div>
+                  <div class="d-flex justify-content-end p-2 gap-2">
+                    <p v-if="activeProfile.class != ``" class="pe-5 fw-bold">Class of {{ activeProfile.class }}</p>
+                    <p v-else class="pe-5 fw-bold">Class of {{ new Date().getFullYear() }}</p>
+                    <a v-if="activeProfile.linkedin" :href="activeProfile.linkedin" target="_blank"
+                      title="linkedIn Link"><i class="mdi mdi-linkedin"></i></a>
+                    <a v-if="activeProfile.resume" :href="activeProfile.resume" target="_blank" title="Resume Link"> <i
+                        class="mdi mdi-note-text"></i>
+                    </a>
+                    <a v-if="activeProfile.linkedin" :href="activeProfile.github" target="_blank" title="Github Link">
+                      <i class="mdi mdi-github"></i></a>
+                  </div>
+                  <div class="ps-5 mt-4 d-flex justify-content-center align-items-center gap-1">
+                    <h1>{{ activeProfile.name }}</h1>
+                    <h2 v-if="account && activeProfile.id == account.id" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal" title="edit Account Info" role="button" class="text-success"><i
+                        class="mdi mdi-pen"></i></h2>
+                  </div>
+                  <div class="mt-4 text-center">
+                    <p> {{ activeProfile.bio }}</p>
+                  </div>
+                </section>
+
               </div>
               <div>
                 <div v-if="account && activeProfile && activeProfile.id == account.id">
